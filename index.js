@@ -27,16 +27,17 @@ async function run() {
     //POST API
     app.post("/orders", async (req, res) => {
       const data = req.body;
-
       const result = await orders.insertOne(data);
       res.send(result);
     });
+
     //GET API
     app.get("/services", async (req, res) => {
       const cursor = services.find({});
       const servicesData = await cursor.toArray();
       res.send(servicesData);
     });
+
     app.get("/visaservices", async (req, res) => {
       const cursor = visaServices.find({});
       const visaServicesData = await cursor.toArray();
@@ -55,6 +56,7 @@ async function run() {
       res.send(allOrders);
       //  console.log('hitting orders');
     });
+
     app.delete("/orders/:Id", async (req, res) => {
       const id = req.params.Id;
       const query = { _id: ObjectId(id) };
@@ -64,7 +66,6 @@ async function run() {
 //PUT API
  app.put('/orders/:Id', async(req, res)=>{
    const id=req.params.Id;
-   const updateValue=req.body;
    const filter={_id:ObjectId(id)}
    const option={upsert:true}
    const updateDoc={
